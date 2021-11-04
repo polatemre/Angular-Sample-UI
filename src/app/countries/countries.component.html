@@ -1,0 +1,62 @@
+<div class="row mb-3">
+  <div>
+    <input
+      type="text"
+      class="form-control"
+      id="allFilterText"
+      placeholder="all search"
+      [(ngModel)]="allFilterText"
+    />
+  </div>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Capital</th>
+      <th scope="col">Region</th>
+      <th scope="col">Flags</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td></td>
+      <td>
+        <div class="col-md-6">
+          <input
+            type="text"
+            class="form-control"
+            id="capitalFilterText"
+            placeholder="capital search"
+            [(ngModel)]="capitalFilterText"
+          />
+        </div>
+      </td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr
+      *ngFor="
+        let country of this.countryService.country
+          | filterCapital: capitalFilterText
+          | filterAll: allFilterText;
+        let i = index
+      "
+    >
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ country.name }}</td>
+      <td>{{ country.capital }}</td>
+      <td>{{ country.region }}</td>
+      <td>
+        <img
+          height="25px"
+          src="{{ country.flags.png }}"
+          alt="{{ country.name }}"
+        />
+      </td>
+    </tr>
+  </tbody>
+</table>
